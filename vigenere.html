@@ -1,6 +1,13 @@
 <!--
 
+	Vigenere cipher
 
+	Created by David T.
+	2/24/16
+
+	This is similar to the Caesar cipher. 
+	Here we use a text key and a table of key rotations.
+	We imported clipboard.js so that we can copy/cut text from the textareas.
 	
 -->
 
@@ -13,26 +20,27 @@
 		<title>Vigenere Cipher</title>
 	</head>
 
-	<body style="padding: 10px;">
-		<div style="width:350px;">
+	<body style="padding: 10px; min-width: 350px; max-width: 900px;">
+		<div style="width: 50%;">
 			<p>Unencrypted</p>
-			<textarea id="unencrypted" style="resize: none; height: 100px; width:250px;"></textarea>
+			<textarea id="unencrypted" style="resize: none; height: 50%; width: 90%"></textarea>
 			<button class="btn" data-clipboard-action="cut" data-clipboard-target="#unencrypted">Cut to clipboard</button>
 		</div>
-		<div style="width:350px;">
+		<div style="width: 50%;">
 			<p>Encrypted</p>
-			<textarea id="encrypted" style="resize: none; height: 100px; width: 250px;"></textarea>
+			<textarea id="encrypted" style="resize: none; height: 50%; width: 90%;"></textarea>
 			<button class="btn" data-clipboard-action="cut" data-clipboard-target="#encrypted">Cut to clipboard</button>
 		</div>
 		<br/>
-		<div style="width:350px; height: 40px;">
+		<div style="width: 50%; height: 10%;">
 			<p style="width:15%; float: left; margin: 15px 0 15px 0;">Key: </p>
 			<input id="key" style="width:50%; float: left; margin: 15px 0 15px 0;"></input>
 		</div>
 		<br/>
-		<div style="width:350px;">
+		<div style="width: 50%;">
 			<button onclick="encryptText()">Encrypt</button>
 			<button onclick="decryptText()">Decrypt</button>
+			<button onclick="clearAreas()">Clear</button>
 		</div>
 
 

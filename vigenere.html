@@ -28,26 +28,26 @@
 	<body style="padding: 10px; min-width: w/2 ; max-width: w;">
 		<div style="width: 100%; margin:0 auto;">
 			<h2>Unencrypted</h2>
-			<textarea id="unencrypted" style="resize: none; line-height: 4; width: 100%"></textarea>
+			<textarea id="unencrypted" style="resize: none; line-height: h/3; width: 100%; font-size: 2em;"></textarea>
 			<button class="btn" data-clipboard-action="cut" data-clipboard-target="#unencrypted">Cut to clipboard</button>
 		</div>
 		<div style="width: 100%; margin:0 auto;">
 			<h2>Encrypted</h2>
-			<textarea id="encrypted" style="resize: none; line-height: 4; width: 100%;"></textarea>
+			<textarea id="encrypted" style="resize: none; height: h/3; width: 100%; font-size: 2em;"></textarea>
 			<button class="btn" data-clipboard-action="cut" data-clipboard-target="#encrypted">Cut to clipboard</button>
 		</div>
 		<br/>
-		<div style="width: 100%; height: 20%; margin:0 auto;">
+		<div style="width: 100%; height: 30%; margin:0 auto;">
 			<h2 style="width:50%; float: left; ">Key </h2>
-			<input id="key" style="width:100%; line-height: 2; float: left;"></input>
+			<input id="key" style="width:100%; height:h/4; float: left; font-size: 1.5em;"></input>
 		</div>
 		<br/>
 		<br/>
 		<br/>
 		<br/>
 		<div style="width: 100%; margin:0 auto; padding-top: 30px">
-			<button onclick="encryptText()">Encrypt</button>
-			<button onclick="decryptText()">Decrypt</button>
+			<button onclick="encryptText()">Encrypt</button>&nbsp;&nbsp;
+			<button onclick="decryptText()">Decrypt</button>&nbsp;&nbsp;
 			<button onclick="clearAreas()">Clear</button>
 		</div>
 

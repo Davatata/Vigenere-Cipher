@@ -22,20 +22,23 @@
 
 	<body style="padding: 10px; min-width: 350px; max-width: 900px;">
 		<div style="width: 50%;">
-			<p>Unencrypted</p>
-			<textarea id="unencrypted" style="resize: none; height: 50%; width: 90%"></textarea>
+			<h2>Unencrypted</h2>
+			<textarea id="unencrypted" style="resize: none; line-height: 4; width: 90%"></textarea>
 			<button class="btn" data-clipboard-action="cut" data-clipboard-target="#unencrypted">Cut to clipboard</button>
 		</div>
 		<div style="width: 50%;">
-			<p>Encrypted</p>
-			<textarea id="encrypted" style="resize: none; height: 50%; width: 90%;"></textarea>
+			<h2>Encrypted</h2>
+			<textarea id="encrypted" style="resize: none; line-height: 4; width: 90%;"></textarea>
 			<button class="btn" data-clipboard-action="cut" data-clipboard-target="#encrypted">Cut to clipboard</button>
 		</div>
 		<br/>
 		<div style="width: 50%; height: 10%;">
-			<p style="width:15%; float: left; margin: 15px 0 15px 0;">Key: </p>
-			<input id="key" style="width:50%; float: left; margin: 15px 0 15px 0;"></input>
+			<h2 style="width:15%; float: left; margin: 15px 0 15px 0;">Key: </h2>
+			<input id="key" style="width:70%; line-height: 2; float: left; margin: 15px 0 15px 0;"></input>
 		</div>
+		<br/>
+		<br/>
+		<br/>
 		<br/>
 		<div style="width: 50%;">
 			<button onclick="encryptText()">Encrypt</button>

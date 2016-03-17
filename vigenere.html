@@ -1,187 +1,83 @@
 <!--
 
-	Vigenere cipher
+  Vigenere cipher
 
-	Created by David T.
-	2/24/16
+  Created by David T.
+  3/16/16
 
-	This is similar to the Caesar cipher. 
-	Here we use a text key and a table of key rotations.
-	We imported clipboard.js so that we can copy/cut text from the textareas.
-	
+  This is similar to the Caesar cipher. 
+  Here we use a text key and a table of key rotations.
+  We imported clipboard.js so that we can copy/cut text from the textareas.
+  
 -->
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-		<script src="clipboard.min.js"></script>
-		<title>Vigenere Cipher</title>
-	</head>
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vigenere Cipher</title>
+        <link rel="stylesheet" href="foundation-6/css/foundation.css" />
+    </head>
+    <body>
 
-	<script>
-		var w = window.innerWidth;
-		var h = window.innerHeight;
-	</script>
+        <div class="row">
+            <div class="large-12 columns">
+                <h1>Vigenere Encryption</h1>
+            </div>
+        </div>
 
-	<body style="padding: 10px; min-width: w/2 ; max-width: w; height:h;">
-		<div style="width: 70%; max-width: 600px; margin:0 auto;">
-			<p style="font-size: 3em; margin: 10px; font-weight: bold">Unencrypted</p>
-			<textarea id="unencrypted" style="resize: none; height: 40%; width: 100%; font-size: 2em;"></textarea>
-			<button class="btn" data-clipboard-action="cut" data-clipboard-target="#unencrypted" style="font-size: 1.5em; width: 50%; margin-top: 30px;">Cut to clipboard</button>
-		</div>
-		<br/>
-		<div style="width: 70%; max-width: 600px; margin:0 auto;">
-			<p style="font-size: 3em; margin: 10px; font-weight: bold">Encrypted</p>
-			<textarea id="encrypted" style="resize: none; height: h/2; width: 100%; font-size: 2em;"></textarea>
-			<button class="btn" data-clipboard-action="cut" data-clipboard-target="#encrypted" style="font-size: 1.5em; width: 50%; margin-top: 30px;">Cut to clipboard</button>
-		</div>
-		<br/>
-		<div style="width: 70%; max-width: 600px; margin:0 auto;">
-			<p style="font-size: 3em; margin: 10px; font-weight: bold">Key</p>
-			<input id="key" style="width:50%; height:100%; float: left; font-size: 1.5em;"></input>
-		</div>
-		<br/>
-		<div style="width: 70%; max-width: 600px; margin:0 auto; padding-top: 30px">
-			<button onclick="encryptText()" style="font-size: 1.5em; width: 30%;">Encrypt</button>&nbsp;&nbsp;
-			<button onclick="decryptText()" style="font-size: 1.5em; width: 30%;">Decrypt</button>&nbsp;&nbsp;
-			<button onclick="clearAreas()"  style="font-size: 1.5em; width: 30%;">Clear</button>
-		</div>
+        <div class="row">
+            <div class="large-6 medium-6 small-12 columns">
+                <div class="row">
+                    <div class="large-12 columns">
+                      <label>Unencrypted
+                        <textarea id="unencrypted" placeholder="Text to be encrypted" style="height:150px" ></textarea>
+                      </label>
+                    </div>
+                    <div class="large-6  small-6  columns">
+                        <button  class="button  expand" onclick="encryptText()">Encrypt</button>
+                    </div>
+                    <div class="large-6  small-6  columns">
+                        <button  class="btn button expand alert" data-clipboard-action="cut" data-clipboard-target="#unencrypted" style="float:right;">Cut / Copy</button>
+                    </div>
+                </div>
+            </div>
 
+            <div class="large-6 medium-6 small-12 columns">
+                <div class="row ">
+                    <div class="large-12 columns">
+                      <label>Encrypted
+                        <textarea id="encrypted" placeholder="Text to be encrypted" style="height:150px" ></textarea>
+                      </label>
+                    </div>
+                    <div class="large-6  small-6  columns">
+                        <button class="button  expand" onclick="decryptText()">Decrypt</button>
+                    </div>
+                    <div class="large-6  small-6  columns ">
+                        <button class="btn button expand alert" data-clipboard-action="cut" data-clipboard-target="#encrypted" style="float:right;">Cut / Copy</button>
+                    </div>
+                </div>
+            </div>
 
-		<script type="text/javascript">
-			// Create array to hold alphabet. 
-			// alph[0]  = 'a'
-			// alph[25] = 'z'
-			var allLetters = 'abcdefghijklmnopqrstuvwxyz';
-			var alph = allLetters.split('');
-			new Clipboard('.btn');
-			var table = [];
-			table[0] = allLetters;
-
-			
-			// populate our table with all 26 rotations of the alphabet
-			for(var i = 1; i<26; i++){
-				allLetters = allLetters.substring(1) + allLetters.substring(0,1);
-				table[i] = allLetters;
-			}
-			console.log(table);
-
-			// we get the rotation key, get the text to encrypt, and put into an array
-			function encryptText(){
-				if(badKey()){ keyError(); }
-				else{
-					var text = $('#unencrypted').val().trim().toLowerCase();
-
-					if(text == ''){}
-					else{
-						var key = $('#key').val().trim();
-						$('#key').val(key);
-						key = key.toLowerCase();
-
-						var ans = '';
-						var n = key.length;
-						var iterator = 0;
-						var arr = text.split('');
-
-						for(var i = 0; i<arr.length; i++){
-							if(isALetter(arr[i])){
-								if(iterator >= n){ iterator = 0; }
-								var x = alph.indexOf(key[iterator]);
-								var y = alph.indexOf(arr[i]);
-								var z = table[x][y];
-
-								ans = ans + z;
-								ans = ans.toUpperCase();
-								iterator = iterator + 1;
-							}
-							else{
-								ans = ans + arr[i];
-							}
-						}
-
-						setEncrypted(ans);
-					}
-				}
-			}
-
-			function decryptText(){
-				if(badKey()){ keyError(); }
-				else{
-					var text = $('#encrypted').val().trim().toLowerCase();
-
-					if(text == ''){}
-					else{
-						var key = $('#key').val().trim();
-						$('#key').val(key);
-						key = key.toLowerCase();
-
-						var ans = '';
-						var n = key.length;
-						var iterator = 0;
-						var arr = text.split('');
-
-						for(var i = 0; i<arr.length; i++){
-							if(isALetter(arr[i])){
-								if(iterator >= n){ iterator = 0; }
-								var x = alph.indexOf(key[iterator]);
-								var y = table[x].indexOf(arr[i]);
-								var z = alph[y];
-
-								ans = ans + z;
-								ans = ans.toUpperCase();
-								iterator = iterator + 1;
-							}
-							else{
-								ans = ans + arr[i];
-							}
-						}
-
-						setUnencrypted(ans);
-					}
-				}
-			}
-
-			// checks if a character is a letter or not
-			function isALetter(charVal)
-			{
-			    if( charVal.toUpperCase() != charVal.toLowerCase() )
-			       return true;
-			    else
-			       return false;
-			}
-
-			// Update the Encrypted textarea
-			function setEncrypted(s){
-				$('#encrypted').val(s);
-			}
-
-			// Update the Unencrypted textarea
-			function setUnencrypted(s){
-				$('#unencrypted').val(s);
-			}
-
-			// Clear both textareas
-			function clearAreas(){
-				$('#unencrypted').val('');
-				$('#encrypted').val('');
-			}
-
-			function keyError(){
-				alert("Error: key must only contain letters.");
-			}
-
-			function badKey(){
-				var key = $('#key').val().trim().toLowerCase();
-				var arr = key.split('');
-				for(var i = 0; i<arr.length; i++){
-					if(! isALetter(arr[i])){
-						return true;
-					}
-				}
-			}
-	 	</script>
-	</body>
-
+            <div class="small-12 columns">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>Key</label>
+                        <input id="key" type="password" placeholder="Key to encrypt your text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="dist/clipboard.min.js"></script>
+        <script src="min.vigenere.js"></script>
+        <script src="foundation-6/js/vendor/jquery.min.js"></script>
+        <script src="foundation-6/js/vendor/what-input.min.js"></script>
+        <script src="foundation-6/js/foundation.min.js"></script>
+        <script>
+            $(document).foundation();
+        </script>
+    </body>
 </html>

@@ -1,4 +1,4 @@
-// Create array to hold alphabet. 
+// Create array to hold alphabet.
 // alph[0]  = 'a'
 // alph[25] = 'z'
 var allLetters = 'abcdefghijklmnopqrstuvwxyz';
@@ -48,7 +48,7 @@ function encryptText(){
 				}
 			}
 
-			setEncrypted(ans);
+			setEncrypted(ans.replace(/ /g,''));
 		}
 	}
 }
@@ -85,7 +85,7 @@ function decryptText(){
 				}
 			}
 
-			setUnencrypted(ans);
+			setUnencrypted(ans.replace(/ /g,''));
 		}
 	}
 }
@@ -115,10 +115,12 @@ function clearAreas(){
 	$('#encrypted').val('');
 }
 
+// Thrown when non alphabetic character inserted
 function keyError(){
 	alert("Error: key must only contain letters.");
 }
 
+// Thrown if key given is bad
 function badKey(){
 	var key = $('#key').val().trim().toLowerCase();
 	var arr = key.split('');

@@ -13,7 +13,6 @@ for(var i = 1; i<26; i++){
 	allLetters = allLetters.substring(1) + allLetters.substring(0,1);
 	table[i] = allLetters;
 }
-console.log(table);
 
 // we get the rotation key, get the text to encrypt, and put into an array
 function encryptText(){
@@ -48,7 +47,12 @@ function encryptText(){
 				}
 			}
 
-			setEncrypted(ans.replace(/ /g,''));
+			var delimiter = ' ';
+			if(document.getElementById('no_spaces').checked) {
+			  delimiter = '';
+			}
+
+			setEncrypted(ans.replace(/ /g, delimiter));
 		}
 	}
 }
@@ -85,7 +89,12 @@ function decryptText(){
 				}
 			}
 
-			setUnencrypted(ans.replace(/ /g,''));
+			var delimiter = ' ';
+			if(document.getElementById('no_spaces').checked) {
+			  delimiter = '';
+			}
+
+			setUnencrypted(ans.replace(/ /g, delimiter));
 		}
 	}
 }

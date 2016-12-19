@@ -1,0 +1,97 @@
+<!--
+
+  Vigenere cipher
+
+  Created by David T.
+  3/16/16
+
+  This is similar to the Caesar cipher.
+  Here we use a text key and a table of key rotations.
+  We imported clipboard.js so that we can copy/cut text from the textareas.
+
+-->
+
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vigenere Cipher</title>
+        <link rel="stylesheet" href="foundation-6/css/foundation.css" />
+    </head>
+    <body>
+
+        <div class="row" style="padding-top: 2%; text-align: center; max-width: 35rem;">
+            <div class="small-12 columns">
+                <h1>Vigenere Encryption</h1>
+            </div>
+        </div>
+
+        <div class="row" style="max-width: 35rem;">
+            <div class="small-12 columns">
+                <div class="row">
+                    <div class="large-12 columns">
+                      <label>Unencrypted
+                        <textarea id="unencrypted" placeholder="Text to be encrypted" style="height:75px" ></textarea>
+                      </label>
+                    </div>
+                    <div class="large-6  small-6  columns">
+                        <button  class="button  expand" onclick="encryptText()">Encrypt</button>
+                    </div>
+                    <div class="large-6  small-6  columns">
+                        <button  class="btn button expand alert" data-clipboard-action="cut" data-clipboard-target="#unencrypted" style="float:right;">Cut / Copy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-12 columns">
+                <div class="row ">
+                    <div class="large-12 columns">
+                      <label>Encrypted
+                        <textarea id="encrypted" placeholder="Text to be decrypted" style="height:75px" ></textarea>
+                      </label>
+                    </div>
+                    <div class="large-6  small-6  columns">
+                        <button class="button  expand" onclick="decryptText()">Decrypt</button>
+                    </div>
+                    <div class="large-6  small-6  columns ">
+                        <button class="btn button expand alert" data-clipboard-action="cut" data-clipboard-target="#encrypted" style="float:right;">Cut / Copy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-12 columns">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>Key</label>
+                        <input id="key" type="password" placeholder="Key to encrypt your text">
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-12 columns">
+              <div class="row">
+                  <div class="large-12 columns">
+                    <label>Remove Spaces</label>
+                    <div class="switch small">
+                      <input class="switch-input" id="no_spaces" type="checkbox">
+                      <label class="switch-paddle" for="no_spaces">
+                      </label>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <br/><br/>
+
+        <script src="clipboard.min.js"></script>
+        <script src="min.vigenere.js"></script>
+        <script src="foundation-6/js/vendor/jquery.min.js"></script>
+        <script src="foundation-6/js/vendor/what-input.min.js"></script>
+        <script src="foundation-6/js/foundation.min.js"></script>
+        <script>
+            $(document).foundation();
+        </script>
+    </body>
+</html>

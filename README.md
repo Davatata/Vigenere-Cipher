@@ -5,3 +5,7 @@
 <li>Tell a friend the key you've chosen.</li>
 <li>Encrypt/decrypt messages back and forth.</li>
 </ul>
+
+<p align="left">
+  <img src="vigenere_pic.png" />
+</p>
